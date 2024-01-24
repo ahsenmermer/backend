@@ -23,9 +23,9 @@ public class Topic {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "opUser_id", nullable = false)
     @JsonIgnore
-    private User user;
+    private OpUser opUser;
 
     @OneToMany(mappedBy = "topic")
     @JsonIgnore

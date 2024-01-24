@@ -1,15 +1,15 @@
 package com.ahsen.learnai.service;
 
-import com.ahsen.learnai.entity.User;
+import com.ahsen.learnai.entity.OpUser;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAll();
+    List<OpUser> getAll();
 
-    String create(User user) throws Exception;
+    String create(OpUser opUser) throws Exception;
 
-    User getUserById(Long id) throws Exception;
+    OpUser getUserById(Long id) throws Exception;
 
-    User login(String username, String password) throws Exception;
+    OpUser login(String username, String password) throws Exception;
 }

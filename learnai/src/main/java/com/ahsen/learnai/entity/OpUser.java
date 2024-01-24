@@ -15,13 +15,13 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class OpUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "opUser")
     @JsonIgnore
     private Set<Topic> topics = new HashSet<>();
 }

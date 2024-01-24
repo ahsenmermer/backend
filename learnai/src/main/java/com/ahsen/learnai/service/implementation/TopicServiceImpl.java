@@ -1,10 +1,10 @@
 package com.ahsen.learnai.service.implementation;
 
+import com.ahsen.learnai.entity.OpUser;
 import com.ahsen.learnai.entity.Topic;
-import com.ahsen.learnai.entity.User;
 import com.ahsen.learnai.pojo.TopicP;
 import com.ahsen.learnai.repository.TopicRepository;
-import com.ahsen.learnai.repository.UserRepository;
+import com.ahsen.learnai.repository.OpUserRepository;
 import com.ahsen.learnai.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class TopicServiceImpl implements TopicService {
     private final TopicRepository topicRepository;
-    private final UserRepository userRepository;
+    private final OpUserRepository opUserRepository;
 
 
     @Override
@@ -30,8 +30,8 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<TopicP> getTopicsByUserId(Long id) {
-        User user = userRepository.findOneById(id);
-        return topicToTopicPList(topicRepository.findAllByUser(user));
+        OpUser opUser = opUserRepository.findOneById(id);
+        return topicToTopicPList(topicRepository.findAllByOpUser(opUser));
     }
 
     private List<TopicP> topicToTopicPList(List<Topic> topics) {
@@ -51,14 +51,14 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public void addUserTopic(Long userId, Topic topic) {
-        User user = userRepository.findOneById(userId);
-        topic.setUser(user);
+        OpUser opUser = opUserRepository.findOneById(userId);
+        topic.setOpUser(opUser);
         topicRepository.save(topic);
     }
 
     @Override
     public Object getRndFouTopic(Long userId) {
-        List<Topic> topics = topicRepository.findAllByUserIdNot(userId);
+        List<Topic> topics = topicRepository.findAllByOpUserIdNot(userId);
         List<TopicP> topicPS = new ArrayList<>();
         List<Topic> globalTopic = Arrays.asList(
                 new Topic(null, "About ChatGpt", "Writing", null, null),

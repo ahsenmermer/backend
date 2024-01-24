@@ -1,8 +1,8 @@
 package com.ahsen.learnai.service.implementation;
 
-import com.ahsen.learnai.entity.User;
+import com.ahsen.learnai.entity.OpUser;
 import com.ahsen.learnai.repository.TopicRepository;
-import com.ahsen.learnai.repository.UserRepository;
+import com.ahsen.learnai.repository.OpUserRepository;
 import com.ahsen.learnai.service.UserService;
 import com.ahsen.learnai.validation.UserValidator;
 import lombok.AllArgsConstructor;
@@ -14,37 +14,37 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private final OpUserRepository opUserRepository;
 
     private final UserValidator userValidator;
     private final TopicRepository topicRepository;
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<OpUser> getAll() {
+        return opUserRepository.findAll();
     }
 
     @Override
-    public String create(User user) throws Exception {
-        userValidator.createUser(user);
+    public String create(OpUser opUser) throws Exception {
+        userValidator.createUser(opUser);
 
-        userRepository.save(user);
-        return user.getUsername() + " created.";
+        opUserRepository.save(opUser);
+        return opUser.getUsername() + " created.";
     }
 
     @Override
-    public User getUserById(Long id) throws Exception {
-        User user = userRepository.findOneById(id);
-        userValidator.findUserById(user);
+    public OpUser getUserById(Long id) throws Exception {
+        OpUser opUser = opUserRepository.findOneById(id);
+        userValidator.findUserById(opUser);
 
-        return user;
+        return opUser;
     }
 
     @Override
-    public User login(String username, String password) throws Exception {
+    public OpUser login(String username, String password) throws Exception {
         userValidator.login(username, password);
 
-        return userRepository.findUserByUsername(username);
+        return opUserRepository.findUserByUsername(username);
     }
 
 
